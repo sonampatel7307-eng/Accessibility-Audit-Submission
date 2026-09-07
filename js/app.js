@@ -1,54 +1,45 @@
-```javascript
-import { fetchProducts } from "./api.js";
+const API_URL = "https://fakestoreapi.com/products";
 
 const state = {
   products: [],
-  filteredProducts: [],
   category: "all",
   search: "",
   sort: "default"
 };
 
-const cachedProducts = localStorage.getItem("productsCache");
+const app = document.getElementById("app");
+const searchInput = document.getElementById("search");
+const categorySelect = document.getElementById("category");
+const sortSelect = document.getElementById("sort");
 
 function showLoading() {
-  document.getElementById("app").innerHTML = `
-    <div class="loading-skeleton" aria-live="polite">
-      Loading products...
-    </div>
-  `;
+  app.innerHTML = "<p>Loading products...</p>";
 }
 
-function showError(message) {
-  document.getElementById("app").innerHTML = `
-    <div class="error-banner" role="alert">
-      ${message}
+function showError() {
+  app.innerHTML = `
+    <div role="alert">
+      Unable to load products. Please refresh the page and try again.
     </div>
   `;
 }
 
 function renderProducts(products) {
-  const container = document.getElementById("app");
-
   if (!products.length) {
-    container.innerHTML = "<p>No products found.</p>";
+    app.innerHTML = "<p>No products found.</p>";
     return;
   }
 
-  container.innerHTML = products
-    .map(
-      (product) => `
-        <article class="product-card">
-          <h3>${product.title}</h3>
-          <p>Category: ${product.category}</p>
-          <p>Price: $${product.price}</p>
-          <button type="button" data-id="${product.id}">
-            Add to Cart
-          </button>
-        </article>
-      `
-    )
-    .join("");
+  app.innerHTML = products.map(product => `
+    <article class="product-card">
+      <h3>${product.title}</h3>
+      <p>Category: ${product.category}</p>
+      <p>Price: $${product.price}</p>
+      <button type="button" data-id="${product.id}">
+        Add to Cart
+      </button>
+    </article>
+  `).join("");
 }
 
 function applyFilters() {
@@ -56,15 +47,15 @@ function applyFilters() {
 
   if (state.category !== "all") {
     products = products.filter(
-      (product) => product.category === state.category
+      product => product.category === state.category
     );
   }
 
-  if (state.search) {
-    const keyword = state.search.toLowerCase();
+  if (state.search.trim()) {
+    const term = state.search.toLowerCase();
 
-    products = products.filter((product) =>
-      product.title.toLowerCase().includes(keyword)
+    products = products.filter(product =>
+      product.title.toLowerCase().includes(term)
     );
   }
 
@@ -76,79 +67,71 @@ function applyFilters() {
     products.sort((a, b) => b.price - a.price);
   }
 
-  state.filteredProducts = products;
   renderProducts(products);
 }
 
-function saveCart(productId) {
+function addToCart(id) {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  if (!cart.includes(productId)) {
-    cart.push(productId);
+  if (!cart.includes(id)) {
+    cart.push(id);
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function setupControls() {
-  const search = document.getElementById("search");
-  const category = document.getElementById("category");
-  const sort = document.getElementById("sort");
-
-  if (search) {
-    search.addEventListener("input", (event) => {
-      state.search = event.target.value;
-      applyFilters();
-    });
-  }
-
-  if (category) {
-    category.addEventListener("change", (event) => {
-      state.category = event.target.value;
-      applyFilters();
-    });
-  }
-
-  if (sort) {
-    sort.addEventListener("change", (event) => {
-      state.sort = event.target.value;
-      applyFilters();
-    });
-  }
-
-  document.addEventListener("click", (event) => {
-    if (event.target.matches("[data-id]")) {
-      const id = Number(event.target.dataset.id);
-      saveCart(id);
-      event.target.textContent = "Added ✓";
-    }
-  });
-}
-
-async function init() {
+async function loadProducts() {
   showLoading();
 
   try {
-    if (cachedProducts) {
-      state.products = JSON.parse(cachedProducts);
+    const cached = localStorage.getItem("productsCache");
+
+    if (cached) {
+      state.products = JSON.parse(cached);
     } else {
-      state.products = await fetchProducts();
+      const response = await fetch(API_URL);
+
+      if (!response.ok) {
+        throw new Error("API request failed");
+      }
+
+      state.products = await response.json();
+
       localStorage.setItem(
         "productsCache",
         JSON.stringify(state.products)
       );
     }
 
-    setupControls();
     applyFilters();
   } catch (error) {
     console.error(error);
-    showError(
-      "Sorry, we couldn't load the data. Please refresh the page and try again."
-    );
+    showError();
   }
 }
 
-init();
-```
+searchInput.addEventListener("input", event => {
+  state.search = event.target.value;
+  applyFilters();
+});
 
+categorySelect.addEventListener("change", event => {
+  state.category = event.target.value;
+  applyFilters();
+});
+
+sortSelect.addEventListener("change", event => {
+  state.sort = event.target.value;
+  applyFilters();
+});
+
+app.addEventListener("click", event => {
+  const button = event.target.closest("[data-id]");
+
+  if (!button) return;
+
+  addToCart(Number(button.dataset.id));
+  button.textContent = "Added ✓";
+});
+
+loadProducts();
