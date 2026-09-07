@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Accessible enterprise dashboard">
+  <title>Accessible Enterprise Dashboard</title>
+</head>
+
+<body>
+
+  <a href="#main-content">Skip to main content</a>
+
+  <header>
+    <h1>Enterprise Dashboard</h1>
+
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#reports">Reports</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div>
+
+    <aside aria-label="Sidebar navigation">
+      <h2>Quick Links</h2>
+      <nav aria-label="Sidebar navigation">
+        <ul>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#reports">Reports</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main id="main-content">
+
+      <section id="dashboard" aria-labelledby="dashboard-heading">
+        <h2 id="dashboard-heading">Dashboard</h2>
+        <p>Welcome to the accessible enterprise dashboard.</p>
+      </section>
+
+      <section id="services" aria-labelledby="services-heading">
+        <h2 id="services-heading">Services</h2>
+
+        <article>
+          <h3>Service Management</h3>
+          <p>Monitor and manage enterprise services.</p>
+          <button type="button" aria-label="View service management details">
+            View Details
+          </button>
+        </article>
+
+        <article>
+          <h3>Accessibility Services</h3>
+          <p>Accessibility-focused dashboard components.</p>
+          <button type="button" aria-label="View accessibility service details">
+            View Details
+          </button>
+        </article>
+      </section>
+
+      <section id="reports" aria-labelledby="reports-heading">
+        <h2 id="reports-heading">Service Report</h2>
+
+        <table>
+          <caption>Current enterprise service status</caption>
+
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Customer Portal</th>
+              <td>Operations</td>
+              <td>Active</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Analytics</th>
+              <td>Data Team</td>
+              <td>Active</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Support Desk</th>
+              <td>Support Team</td>
+              <td>Maintenance</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-labelledby="form-heading">
+        <h2 id="form-heading">Service Request</h2>
+
+        <form>
+
+          <fieldset>
+            <legend>Request Information</legend>
+
+            <p>
+              <label for="name">Full Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                minlength="2"
+                autocomplete="name"
+                aria-required="true"
+              >
+            </p>
+
+            <p>
+              <label for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+                aria-required="true"
+              >
+            </p>
+
+            <p>
+              <label for="service">Select Service *</label>
+              <select id="service" name="service" required aria-required="true">
+                <option value="">Choose a service</option>
+                <option value="portal">Customer Portal</option>
+                <option value="analytics">Analytics</option>
+                <option value="support">Support Desk</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="message">Request Details *</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                minlength="10"
+                aria-required="true"
+              ></textarea>
+            </p>
+
+            <button type="submit">Submit Request</button>
+
+          </fieldset>
+
+        </form>
+      </section>
+
+    </main>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Accessible Enterprise Dashboard</p>
+  </footer>
+
+</body>
+</html>
