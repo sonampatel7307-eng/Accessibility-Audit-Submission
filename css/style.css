@@ -1,0 +1,83 @@
+/* Accessible Enterprise Dashboard Styles */
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+header,
+footer {
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+header {
+  background: #f5f5f5;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+main,
+aside {
+  padding: 1rem;
+}
+
+section,
+article {
+  margin-bottom: 2rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+th,
+td {
+  border: 1px solid #555;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th {
+  background: #eee;
+}
+
+fieldset {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+button {
+  cursor: pointer;
+}
