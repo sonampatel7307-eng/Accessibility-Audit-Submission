@@ -1,34 +1,63 @@
-Accessibility Baseline & Repository Architecture Audit
+# Semantic HTML5 & Accessible Component Architecture
 
-Overview
+## Overview
 
-This project documents an accessibility and architecture audit of a public-facing service website.
+This project provides the structural foundation for an accessible enterprise dashboard using semantic HTML5 and WCAG 2.1 accessibility principles.
 
-Accessibility Audit
+## Features
 
-The audit focused on:
+- Semantic HTML5 structure
+- Accessible header and navigation
+- Sidebar navigation using `<aside>`
+- Main content using `<main>`
+- Structured sections and articles
+- Accessible data table with captions and scope attributes
+- Accessible form controls with proper labels
+- Required and validation attributes
+- Keyboard-friendly focus indicators
+- Skip-to-main-content link
+- Accessible service details functionality
+- CSS and JavaScript separated into dedicated files
 
-- Keyboard-only navigation
-- Accessibility issues and evidence
-- Remediation priorities
-- Accessible and maintainable UI practices
+## Project Structure
 
-Repository Structure
+Accessibility-Audit-Submission/
 
-The project is organized into frontend, backend, documentation, and supporting files to maintain clear separation of responsibilities.
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── app.js
+└── README.md
 
-Key Accessibility Areas
+## Accessibility
 
-- Keyboard navigation
-- Semantic structure
-- Form accessibility
-- Error handling
-- Accessible UI components
+The project follows accessible development practices including:
 
-Deliverables
+- Semantic HTML5 elements
+- Proper heading hierarchy
+- Labelled form controls
+- Keyboard accessibility
+- Visible focus indicators
+- Accessible navigation landmarks
+- Table captions and scope attributes
+- Skip navigation link
+- Accessible interactive controls
 
-This repository contains the project implementation and supporting documentation for the Accessibility Baseline & Repository Architecture Audit.
+## HTML Validation
 
-Author
+The index.html file was validated using the W3C Nu HTML Checker.
+
+The final HTML structure was checked for syntax and markup errors.
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- WCAG 2.1 accessibility principles
+
+## Author
 
 Sonam Patel
+
