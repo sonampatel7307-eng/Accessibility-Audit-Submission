@@ -18,7 +18,7 @@ function showLoading() {
 
 function showError() {
   app.innerHTML = `
-    <div role="alert">
+    <div class="error-banner" role="alert">
       Unable to load products. Please refresh the page and try again.
     </div>
   `;
@@ -33,9 +33,27 @@ function renderProducts(products) {
   app.innerHTML = products.map(product => `
     <article class="product-card">
       <h3>${product.title}</h3>
+
       <p>Category: ${product.category}</p>
+
       <p>Price: $${product.price}</p>
-      <button type="button" data-id="${product.id}">
+
+      <button
+        type="button"
+        data-id="${product.id}"
+        style="
+          display: inline-block;
+          visibility: visible;
+          opacity: 1;
+          background: #2563eb;
+          color: #ffffff;
+          padding: 10px 16px;
+          margin-top: 10px;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 16px;
+        ">
         Add to Cart
       </button>
     </article>
@@ -131,6 +149,7 @@ app.addEventListener("click", event => {
   if (!button) return;
 
   addToCart(Number(button.dataset.id));
+
   button.textContent = "Added ✓";
 });
 
