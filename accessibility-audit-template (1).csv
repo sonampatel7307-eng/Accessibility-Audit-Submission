@@ -1,0 +1,3 @@
+issue_id,page_or_component,wcag_reference,evidence,severity,user_impact,recommended_fix,owner,status
+WEB-001,Example navigation,2.1.1 Keyboard,,,Describe who is blocked and how,Describe the smallest verifiable remediation,Student,Open
+WEB-002,Example form,3.3.2 Labels or Instructions,,,Describe who is blocked and how,Describe the smallest verifiable remediation,Student,Open
